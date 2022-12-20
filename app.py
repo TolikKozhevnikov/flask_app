@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 metrics = PrometheusMetrics(app)
 
-BASE_URL = 'http://localhost:5001'
+BASE_URL = 'http://10.12.10.20:5001'
 
 
 @app.route('/predict', methods=['POST'])
