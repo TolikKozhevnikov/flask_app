@@ -4,7 +4,12 @@ import datetime
 import pandas as pd
 from prometheus_flask_exporter import PrometheusMetrics
 import json
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 metrics = PrometheusMetrics(app)
 all_metrics_base = {}
@@ -14,6 +19,7 @@ BASE_URL = 'http://10.12.10.20:5001'
 METRICS_SERVER_URL = 'http://10.12.10.20:5001'
 
 @app.route('/predict', methods=['POST'])
+@cross_origin()
 def predict():
     content_type = request.headers.get('Content-Type')
     if content_type == 'application/json':
